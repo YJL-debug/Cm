@@ -23,6 +23,7 @@ namespace WebApplication1.Context
             PropertyInfo Key = ty.GetProperties().Where(s => s.GetCustomAttributes(typeof(KeyAttribute), false).Length > 0).FirstOrDefault();//获取主键
             string keyname = Key.Name;
             string filename = string.Join(",", ty.GetProperties().Where(s => s.Name != keyname).Select(s => s.Name));
+            //字段的值  晋力改
             string filevalues = string.Join(",", ty.GetProperties().Where(s => s.Name != keyname).Select(s =>  "'"+s.GetValue(ty)+"'"));
             string sql = $"insert into Guanlikaosi({filename}) values({filevalues})";
             return sql;
